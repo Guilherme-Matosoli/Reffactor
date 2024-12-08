@@ -1,9 +1,9 @@
 package cmd
 
 import (
-	"fmt"
 	"os/user"
 
+	"github.com/fatih/color"
 	"github.com/spf13/cobra"
 )
 
@@ -14,11 +14,11 @@ var whoami = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		usr, err := user.Current()
 		if err != nil {
-			fmt.Println("Error geting user information: ", err)
+			color.Red("Error geting user information: ", err)
 			return
 		}
 
-		fmt.Println("You are logged as ", usr)
+		color.Green("You are logged as %s", usr.Name)
 	},
 }
 
