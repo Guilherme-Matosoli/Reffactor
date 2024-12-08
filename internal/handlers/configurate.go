@@ -3,7 +3,9 @@ package handlers
 import (
 	"fmt"
 
+	// "github.com/Guilherme-Matosoli/Reffactor/internal/utils"
 	"github.com/charmbracelet/huh"
+	"github.com/charmbracelet/huh/spinner"
 	"github.com/spf13/cobra"
 )
 
@@ -15,20 +17,14 @@ var asciiArt = `
                                        ▐▌                                           ▐▌`
 
 func Configurate(cmd *cobra.Command, args []string) {
-	fmt.Print("\033[32m", asciiArt)
-	var option string
+	fmt.Print("\033[35m", asciiArt)
+	var apiKey string
 
 	form := huh.NewForm(
 		huh.NewGroup(
-			huh.NewSelect[string]().
-				Title("Choose option").
-				Options(
-					huh.NewOption("a", "a"),
-					huh.NewOption("b", "b"),
-					huh.NewOption("c", "c"),
-					huh.NewOption("d", "d"),
-				).
-				Value(&option),
+			huh.NewText().
+				Title("\n\nSet your OpenAI api key: ").
+				Value(&apiKey),
 		),
 	)
 
@@ -37,5 +33,5 @@ func Configurate(cmd *cobra.Command, args []string) {
 		fmt.Print(err)
 	}
 
-	fmt.Println(form)
+	spinner.New().Title("Verifying your api key...").Run()
 }
