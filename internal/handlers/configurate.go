@@ -1,16 +1,17 @@
 package handlers
 
 import (
+	"errors"
 	"fmt"
 
-	// "github.com/Guilherme-Matosoli/Reffactor/internal/utils"
+	"github.com/Guilherme-Matosoli/Reffactor/internal/utils"
 	"github.com/charmbracelet/huh"
 	"github.com/charmbracelet/huh/spinner"
 	"github.com/spf13/cobra"
 )
 
 var asciiArt = `
-▗▖ ▗▖▗▞▀▚▖█ ▗▞▀▘ ▄▄▄  ▄▄▄▄  ▗▞▀▚▖       ■   ▄▄▄      ▗▄▄▖ ▗▞▀▚▖▗▞▀▀▘▗▞▀▀▘▗▞▀▜▌▗▞▀▘   ■   ▄▄▄   ▄▄▄ 
+  ▗▖ ▗▖▗▞▀▚▖█ ▗▞▀▘ ▄▄▄  ▄▄▄▄  ▗▞▀▚▖       ■   ▄▄▄      ▗▄▄▖ ▗▞▀▚▖▗▞:= ▀▀▘▗▞▀▀▘▗▞▀▜▌▗▞▀▘   ■   ▄▄▄   ▄▄▄ 
 ▐▌ ▐▌▐▛▀▀▘█ ▝▚▄▖█   █ █ █ █ ▐▛▀▀▘    ▗▄▟▙▄▖█   █     ▐▌ ▐▌▐▛▀▀▘▐▌   ▐▌   ▝▚▄▟▌▝▚▄▖▗▄▟▙▄▖█   █ █    
 ▐▌ ▐▌▝▚▄▄▖█     ▀▄▄▄▀ █   █ ▝▚▄▄▖      ▐▌  ▀▄▄▄▀     ▐▛▀▚▖▝▚▄▄▖▐▛▀▘ ▐▛▀▘            ▐▌  ▀▄▄▄▀ █    
 ▐▙█▟▌     █                            ▐▌            ▐▌ ▐▌     ▐▌   ▐▌              ▐▌             
@@ -23,8 +24,21 @@ func Configurate(cmd *cobra.Command, args []string) {
 	form := huh.NewForm(
 		huh.NewGroup(
 			huh.NewText().
-				Title("\n\nSet your OpenAI api key: ").
-				Value(&apiKey),
+				Title("Set your OpenAI api key: ").
+				Value(&apiKey).
+				Validate(func(s string) error {
+					spinner.
+						New().
+						Title("Verifying your api key...").
+						Run()
+
+					err := utils.VerifyKey(apiKey)
+					if err != nil {
+						return errors.New("Your key is invalid, please set a valid key and try again!")
+					}
+
+					return nil
+				}),
 		),
 	)
 
@@ -33,5 +47,4 @@ func Configurate(cmd *cobra.Command, args []string) {
 		fmt.Print(err)
 	}
 
-	spinner.New().Title("Verifying your api key...").Run()
 }
