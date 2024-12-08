@@ -11,6 +11,7 @@ func VerifyKey(key string) error {
 	client := openai.NewClient(option.WithAPIKey(key))
 
 	ctx := context.Background()
+
 	_, err := client.Models.List(ctx)
 	if err != nil {
 		return err

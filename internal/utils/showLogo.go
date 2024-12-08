@@ -10,4 +10,5 @@ func ShowLogo() {
 ▐▌ ▐▌▐▙▄▄▖▐▌   ▐▌   ▐▌ ▐▌▝▚▄▄▖  █ ▝▚▄▞▘▐▌ ▐▌`
 
 	fmt.Print("\033[35m", asciiArt, "\n\n\n")
+	fmt.Print("\n\n\n")
 }
