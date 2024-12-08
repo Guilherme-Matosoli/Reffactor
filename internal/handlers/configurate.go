@@ -3,6 +3,7 @@ package handlers
 import (
 	"errors"
 	"fmt"
+	"os"
 
 	"github.com/Guilherme-Matosoli/Reffactor/internal/utils"
 	"github.com/charmbracelet/huh"
@@ -37,7 +38,7 @@ func Configurate(cmd *cobra.Command, args []string) {
 
 	err := form.Run()
 	if err != nil {
-		fmt.Print(err)
+		fmt.Println(err)
+		os.Exit(0)
 	}
-
 }
