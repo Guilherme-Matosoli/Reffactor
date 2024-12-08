@@ -11,6 +11,7 @@ import (
 )
 
 func Configurate(cmd *cobra.Command, args []string) {
+	utils.ShowLogo()
 	var apiKey string
 
 	form := huh.NewForm(
