@@ -10,15 +10,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var asciiArt = `
-  ▗▖ ▗▖▗▞▀▚▖█ ▗▞▀▘ ▄▄▄  ▄▄▄▄  ▗▞▀▚▖       ■   ▄▄▄      ▗▄▄▖ ▗▞▀▚▖▗▞:= ▀▀▘▗▞▀▀▘▗▞▀▜▌▗▞▀▘   ■   ▄▄▄   ▄▄▄ 
-▐▌ ▐▌▐▛▀▀▘█ ▝▚▄▖█   █ █ █ █ ▐▛▀▀▘    ▗▄▟▙▄▖█   █     ▐▌ ▐▌▐▛▀▀▘▐▌   ▐▌   ▝▚▄▟▌▝▚▄▖▗▄▟▙▄▖█   █ █    
-▐▌ ▐▌▝▚▄▄▖█     ▀▄▄▄▀ █   █ ▝▚▄▄▖      ▐▌  ▀▄▄▄▀     ▐▛▀▚▖▝▚▄▄▖▐▛▀▘ ▐▛▀▘            ▐▌  ▀▄▄▄▀ █    
-▐▙█▟▌     █                            ▐▌            ▐▌ ▐▌     ▐▌   ▐▌              ▐▌             
-                                       ▐▌                                           ▐▌`
-
 func Configurate(cmd *cobra.Command, args []string) {
-	fmt.Print("\033[35m", asciiArt)
 	var apiKey string
 
 	form := huh.NewForm(
